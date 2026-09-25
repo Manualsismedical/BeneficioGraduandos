@@ -249,6 +249,11 @@ footer b{color:#fff}
               <input id="telefono" name="telefono" type="tel" autocomplete="tel" placeholder="0414-1234567" required>
               <span class="err">Ingresa un teléfono válido.</span>
             </div>
+            <div class="field full">
+              <label for="correo">Correo electrónico <span class="req">*</span></label>
+              <input id="correo" name="correo" type="email" autocomplete="email" inputmode="email" placeholder="tucorreo@ejemplo.com" required>
+              <span class="err">Ingresa un correo válido.</span>
+            </div>
             <div class="field">
               <label for="pais">País <span class="req">*</span></label>
               <select id="pais" name="pais" required></select>
@@ -298,7 +303,8 @@ footer b{color:#fff}
 <script>
 /* ===== CONFIGURACIÓN ===== */
 const WHATSAPP = '584145764613';   // Número que recibe las solicitudes (formato internacional, sin +)
-const SHEETS_URL = '';             // Opcional: URL de Google Apps Script para guardar cada registro en Google Sheets
+const SUPABASE_URL = 'https://qzyospcsllvuttkqsmic.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6eW9zcGNzbGx2dXR0a3FzbWljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNDEzMzYsImV4cCI6MjEwNTkxNzMzNn0.65LzFAA2yH7_nF1PpEAP6_z_bflWhRMmpt1mAMlq56k'; // Supabase > Project Settings > API Keys > anon / publishable
 
 const PAISES = ['Venezuela','Argentina','Bolivia','Chile','Colombia','Costa Rica','Cuba','Ecuador','El Salvador','España','Estados Unidos','Guatemala','Honduras','México','Nicaragua','Panamá','Paraguay','Perú','Puerto Rico','República Dominicana','Uruguay','Otro'];
 const ESTADOS_VE = ['Amazonas','Anzoátegui','Apure','Aragua','Barinas','Bolívar','Carabobo','Cojedes','Delta Amacuro','Distrito Capital','Falcón','Guárico','La Guaira','Lara','Mérida','Miranda','Monagas','Nueva Esparta','Portuguesa','Sucre','Táchira','Trujillo','Yaracuy','Zulia'];
@@ -325,6 +331,7 @@ $('form').addEventListener('submit', e => {
     graduando: $('graduando').value.trim(),
     cedula: $('tipoCedula').value + '-' + $('cedula').value.trim(),
     telefono: $('telefono').value.trim(),
+    correo: $('correo').value.trim().toLowerCase(),
     pais: pais.value,
     estado: pais.value === 'Venezuela' ? estado.value : estadoTxt.value.trim()
   };
@@ -333,6 +340,7 @@ $('form').addEventListener('submit', e => {
   ok = setInvalid($('graduando'), v.graduando.length < 3) && ok;
   ok = setInvalid($('cedula'), $('cedula').value.length < 5) && ok;
   ok = setInvalid($('telefono'), v.telefono.replace(/\D/g,'').length < 7) && ok;
+  ok = setInvalid($('correo'), !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.correo)) && ok;
   ok = setInvalid(pais, !v.pais) && ok;
   ok = setInvalid(estado, !v.estado) && ok;
   const c = $('consent').checked; $('consentWrap').classList.toggle('invalid', !c); ok = c && ok;
@@ -340,12 +348,17 @@ $('form').addEventListener('submit', e => {
 
   const msg = `*SOLICITUD – BENEFICIO GRADUANDOS SISMEDICAL*\n(6 meses de acceso gratuito)\n\n` +
     `• Padrino/Madrina: ${v.padrino}\n• Graduando: ${v.graduando}\n• Cédula: ${v.cedula}\n` +
-    `• Teléfono: ${v.telefono}\n• País: ${v.pais}\n• Estado: ${v.estado}\n\n` +
+    `• Teléfono: ${v.telefono}\n• Correo: ${v.correo}\n• País: ${v.pais}\n• Estado: ${v.estado}\n\n` +
     `Solicito formalmente la activación de mi beneficio.`;
   const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
-  if (SHEETS_URL) {
-    fetch(SHEETS_URL, {method:'POST', mode:'no-cors', body: JSON.stringify({...v, fecha: new Date().toISOString()})}).catch(()=>{});
+  if (SUPABASE_KEY && !SUPABASE_KEY.startsWith('PEGAR')) {
+    fetch(`${SUPABASE_URL}/rest/v1/graduandos`, {
+      method:'POST', keepalive:true,
+      headers:Object.assign({'apikey':SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+        SUPABASE_KEY.startsWith('sb_') ? {} : {'Authorization':`Bearer ${SUPABASE_KEY}`}),
+      body: JSON.stringify(v)
+    }).catch(()=>{});
   }
   window.open(url, '_blank');
   $('waAgain').href = url;
@@ -353,7 +366,7 @@ $('form').addEventListener('submit', e => {
   $('success').style.display = 'block';
 });
 
-['padrino','graduando','cedula','telefono','estado','estadoTxt'].forEach(id =>
+['padrino','graduando','cedula','telefono','correo','estado','estadoTxt'].forEach(id =>
   $(id).addEventListener('input', () => $(id).closest('.field').classList.remove('invalid')));
 </script>
 </body>
