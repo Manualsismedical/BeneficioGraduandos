@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beneficio Sismedical para Graduandos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B1C48; --blue:#0057EE; --blue-soft:#E8F0FE; --sky:#A9D3E3;
+  --ink:#1F2A44; --muted:#5B6782; --line:#DCE4F2; --bg:#F4F7FC; --white:#fff;
+  --ok:#128C4A; --err:#C62828; --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--blue)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;background:linear-gradient(150deg,var(--navy) 0%,#10307A 60%,var(--blue) 130%);color:#fff;padding:28px 0 96px}
+.hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 22px);pointer-events:none}
+.hero::after{content:"";position:absolute;width:520px;height:520px;right:-160px;top:-180px;border-radius:50%;background:radial-gradient(circle,rgba(0,87,238,.55),transparent 65%)}
+.topbar{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-chip{background:#fff;border-radius:14px;padding:8px 14px;display:inline-flex;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.logo-chip img{height:42px;width:auto;display:block}
+.pill{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 14px;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.08)}
+.hero-body{position:relative;z-index:1;margin-top:56px;display:grid;grid-template-columns:1.25fr .9fr;gap:40px;align-items:center}
+.eyebrow{font-size:.85rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sky)}
+h1{font-size:clamp(2rem,5.2vw,3.4rem);line-height:1.05;font-weight:900;margin:12px 0 18px;letter-spacing:-.01em}
+h1 span{color:#7FB2FF}
+.lead{font-size:1.08rem;color:rgba(255,255,255,.86);max-width:540px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:none;cursor:pointer;font-family:inherit;font-weight:800;font-size:1rem;border-radius:12px;padding:15px 26px;text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 10px 26px rgba(0,87,238,.4)}
+.btn-primary:hover{transform:translateY(-2px);background:#0A4FD1}
+.btn-ghost{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn-ghost:hover{background:rgba(255,255,255,.18)}
+.offer{background:#fff;color:var(--navy);border-radius:24px;padding:30px 26px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.28);position:relative}
+.offer .ribbon{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.12em;padding:6px 14px;border-radius:999px;white-space:nowrap}
+.offer .num{font-size:5.2rem;font-weight:900;line-height:1;color:var(--blue)}
+.offer .unit{font-size:1.5rem;font-weight:900;letter-spacing:.02em}
+.offer .sub{font-weight:600;color:var(--muted);margin-top:4px}
+.offer hr{border:none;border-top:1px dashed var(--line);margin:18px 0}
+.offer .ally{font-size:.92rem;font-weight:600;color:var(--ink)}
+.offer .ally b{color:var(--navy);display:block;font-size:1.05rem}
+
+/* SECTIONS */
+main{position:relative;z-index:2;margin-top:-56px}
+.card{background:#fff;border-radius:var(--radius);box-shadow:0 10px 34px rgba(11,28,72,.08);padding:34px}
+.intro{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.intro .item{padding:4px 6px}
+.intro .ic{width:44px;height:44px;border-radius:12px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;margin-bottom:12px}
+.intro h3{font-size:1.02rem;font-weight:800;color:var(--navy);margin-bottom:6px}
+.intro p{font-size:.93rem;color:var(--muted)}
+section{margin-top:56px}
+.sec-head{text-align:center;max-width:640px;margin:0 auto 28px}
+.sec-head .eyebrow{color:var(--blue)}
+h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:900;color:var(--navy);line-height:1.15;margin-top:6px}
+.sec-head p{color:var(--muted);margin-top:10px}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.feat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;transition:border-color .15s,transform .15s}
+.feat:hover{border-color:var(--blue);transform:translateY(-3px)}
+.feat .ic{width:40px;height:40px;border-radius:10px;background:var(--navy);color:#fff;display:grid;place-items:center;margin-bottom:12px}
+.feat h3{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:4px}
+.feat p{font-size:.9rem;color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+.step{background:#fff;border-radius:16px;padding:24px;border:1px solid var(--line);position:relative}
+.step::before{counter-increment:s;content:counter(s);width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;font-weight:900;display:grid;place-items:center;margin-bottom:12px}
+.step h3{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:4px}
+.step p{font-size:.9rem;color:var(--muted)}
+.notice{margin-top:18px;background:var(--blue-soft);border-left:5px solid var(--blue);border-radius:12px;padding:16px 18px;font-size:.93rem;color:var(--navy)}
+.notice b{font-weight:800}
+
+/* FORM */
+.form-wrap{display:grid;grid-template-columns:.85fr 1.15fr;overflow:hidden;padding:0}
+.form-side{background:linear-gradient(160deg,var(--navy),#10307A);color:#fff;padding:36px 30px}
+.form-side h2{color:#fff}
+.form-side p{color:rgba(255,255,255,.82);margin-top:12px;font-size:.95rem}
+.form-side ul{list-style:none;margin-top:22px;display:grid;gap:12px}
+.form-side li{display:flex;gap:10px;font-size:.92rem;align-items:flex-start}
+.form-side li svg{flex:none;margin-top:2px;color:#7FB2FF}
+form{padding:34px 30px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.field.full{grid-column:1/-1}
+label{font-size:.82rem;font-weight:700;color:var(--navy)}
+label .req{color:var(--blue)}
+input,select{font-family:inherit;font-size:1rem;color:var(--ink);background:#FAFCFF;border:1.5px solid var(--line);border-radius:11px;padding:13px 14px;width:100%;transition:border-color .15s,box-shadow .15s;min-width:0}
+input:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,87,238,.12);background:#fff}
+.combo{display:flex;gap:8px}
+.combo select{width:84px;flex:none}
+.field.invalid input,.field.invalid select{border-color:var(--err)}
+.err{font-size:.78rem;color:var(--err);font-weight:600;display:none}
+.field.invalid .err{display:block}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;color:var(--muted);margin:4px 0 20px}
+.consent input{width:18px;height:18px;flex:none;margin-top:3px;accent-color:var(--blue)}
+.consent.invalid{color:var(--err)}
+form .btn{width:100%;font-size:1.05rem;padding:17px}
+.hint{font-size:.8rem;color:var(--muted);text-align:center;margin-top:12px}
+.success{display:none;padding:44px 30px;text-align:center}
+.success .ic{width:68px;height:68px;border-radius:50%;background:#E6F6EC;color:var(--ok);display:grid;place-items:center;margin:0 auto 16px}
+.success h3{font-size:1.4rem;font-weight:900;color:var(--navy)}
+.success p{color:var(--muted);margin-top:8px}
+.success .btn{margin-top:20px}
+
+/* CONTACT + FOOTER */
+.contact{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.contact a{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;text-decoration:none;color:var(--ink);transition:border-color .15s}
+.contact a:hover{border-color:var(--blue)}
+.contact .ic{width:44px;height:44px;border-radius:12px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;flex:none}
+.contact small{display:block;font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.contact span{font-weight:700;color:var(--navy);word-break:break-all;font-size:.95rem}
+footer{margin-top:64px;background:var(--navy);color:rgba(255,255,255,.75);padding:34px 0;text-align:center;font-size:.88rem}
+footer b{color:#fff}
+
+@media (max-width:860px){
+  .hero-body,.form-wrap{grid-template-columns:1fr}
+  .intro,.steps,.contact{grid-template-columns:1fr}
+  .hero{padding-bottom:84px}
+  .hero-body{margin-top:36px;gap:34px}
+}
+@media (max-width:520px){
+  .wrap{padding:0 16px}
+  .grid2{grid-template-columns:1fr;gap:0}
+  .card,form{padding:24px 20px}
+  .form-side{padding:28px 20px}
+  .logo-chip img{height:34px}
+  .pill{display:none}
+  .offer .num{font-size:4.4rem}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="logo-chip"><img src="data:image/webp;base64,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" alt="Sismedical · Historias Clínicas Online"></div>
+      <div class="pill">Promoción de Medicina</div>
+    </div>
+    <div class="hero-body">
+      <div>
+        <div class="eyebrow">Beneficio especial para graduandos</div>
+        <h1>Empieza tu ejercicio profesional con <span>Sismedical</span></h1>
+        <p class="lead">Una alianza para acompañar a los nuevos profesionales de la salud en el inicio de su ejercicio profesional, con una herramienta digital para gestionar a tus pacientes e historias clínicas.</p>
+        <div class="cta-row">
+          <a href="#registro" class="btn btn-primary">Activar mi beneficio</a>
+          <a href="#incluye" class="btn btn-ghost">¿Qué incluye?</a>
+        </div>
+      </div>
+      <div class="offer">
+        <div class="ribbon">ACCESO GRATUITO</div>
+        <div class="num">6</div>
+        <div class="unit">MESES</div>
+        <div class="sub">al sistema Sismedical</div>
+        <hr>
+        <div class="ally">Alianza Sismedical +<b>Dra. Mairim Bodor</b>Madrina de la Promoción</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="card intro">
+    <div class="item">
+      <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div>
+      <h3>¿Quiénes lo reciben?</h3>
+      <p>Los graduandos de la promoción, con <b>seis (6) meses de acceso gratuito</b> al sistema Sismedical.</p>
+    </div>
+    <div class="item">
+      <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20h5v-2a4 4 0 0 0-3-3.87"/><path d="M9 20H2v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3>Una alianza con propósito</h3>
+      <p>Sismedical y la <b>Dra. Mairim Bodor</b>, Madrina de la Promoción, se unen para facilitar el comienzo de tu práctica.</p>
+    </div>
+    <div class="item">
+      <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+      <h3>Tú decides cuándo empezar</h3>
+      <p>Los 6 meses comienzan a contarse <b>desde que comunicas formalmente</b> tu intención de activar el beneficio.</p>
+    </div>
+  </div>
+
+  <section id="incluye">
+    <div class="sec-head">
+      <div class="eyebrow">Todo incluido</div>
+      <h2>¿Qué incluye el acceso gratuito?</h2>
+      <p>Todo lo que necesitas para organizar tu consulta desde el primer día.</p>
+    </div>
+    <div class="features">
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div><h3>Registro de pacientes</h3><p>Creación y administración de los datos básicos de tus pacientes.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 12v6M9 15h6"/></svg></div><h3>Historias médicas</h3><p>Almacenamiento y gestión de la información de la historia clínica.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7z"/><path d="m8.5 8.5 7 7"/></svg></div><h3>Récipes automáticos</h3><p>Elaboración práctica de récipes directamente desde el sistema.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div><h3>Agendamiento de citas</h3><p>Organización y gestión de las citas de tus pacientes.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div><h3>Informes médicos</h3><p>Generación de informes médicos desde el sistema.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg></div><h3>Soporte ilimitado</h3><p>Acompañamiento y asistencia durante todo el uso de Sismedical.</p></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div><h3>Actualizaciones gratis</h3><p>Acceso a mejoras y actualizaciones del sistema sin costo adicional.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow">Así de fácil</div>
+      <h2>¿Cómo activar tus 6 meses gratuitos?</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Completa el registro</h3><p>Llena el formulario con tus datos y los de tu padrino o madrina.</p></div>
+      <div class="step"><h3>Envíalo por WhatsApp</h3><p>Tu solicitud llega directo al equipo de Sismedical como comunicación formal.</p></div>
+      <div class="step"><h3>Recibe tu acceso</h3><p>Te contactamos para activar tu cuenta y acompañarte en tus primeros pasos.</p></div>
+    </div>
+    <div class="notice"><b>Importante:</b> el beneficio tiene una duración de seis (6) meses por graduando. El período comienza a partir de la fecha en que el graduando solicite formalmente la activación.</div>
+  </section>
+
+  <section id="registro">
+    <div class="card form-wrap">
+      <div class="form-side">
+        <div class="eyebrow">Registro</div>
+        <h2>Solicita la activación de tu beneficio</h2>
+        <p>Completa tus datos. Al enviar, se abrirá WhatsApp con tu solicitud lista para mandar al equipo de Sismedical.</p>
+        <ul>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>6 meses de acceso sin costo</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Soporte ilimitado incluido</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Acceso desde cualquier dispositivo</li>
+        </ul>
+      </div>
+
+      <div>
+        <form id="form" novalidate>
+          <div class="grid2">
+            <div class="field full">
+              <label for="padrino">Nombre del padrino o madrina <span class="req">*</span></label>
+              <input id="padrino" name="padrino" type="text" autocomplete="off" placeholder="Nombre y apellido" required>
+              <span class="err">Indica el nombre de tu padrino o madrina.</span>
+            </div>
+            <div class="field full">
+              <label for="graduando">Nombre y apellido del graduando <span class="req">*</span></label>
+              <input id="graduando" name="graduando" type="text" autocomplete="name" placeholder="Ej. María José Pérez" required>
+              <span class="err">Indica tu nombre completo.</span>
+            </div>
+            <div class="field">
+              <label for="cedula">Cédula <span class="req">*</span></label>
+              <div class="combo">
+                <select id="tipoCedula" aria-label="Tipo de cédula"><option>V</option><option>E</option><option>P</option></select>
+                <input id="cedula" name="cedula" type="text" inputmode="numeric" placeholder="12345678" required>
+              </div>
+              <span class="err">Ingresa una cédula válida (solo números).</span>
+            </div>
+            <div class="field">
+              <label for="telefono">Teléfono / WhatsApp <span class="req">*</span></label>
+              <input id="telefono" name="telefono" type="tel" autocomplete="tel" placeholder="0414-1234567" required>
+              <span class="err">Ingresa un teléfono válido.</span>
+            </div>
+            <div class="field">
+              <label for="pais">País <span class="req">*</span></label>
+              <select id="pais" name="pais" required></select>
+              <span class="err">Selecciona tu país.</span>
+            </div>
+            <div class="field" id="estadoField">
+              <label for="estado">Estado <span class="req">*</span></label>
+              <select id="estado" name="estado" required></select>
+              <input id="estadoTxt" type="text" placeholder="Estado / provincia" style="display:none">
+              <span class="err">Indica tu estado.</span>
+            </div>
+          </div>
+          <label class="consent" id="consentWrap"><input type="checkbox" id="consent"> Autorizo a Sismedical a contactarme para activar el beneficio de 6 meses de acceso gratuito.</label>
+          <button type="submit" class="btn btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.3-.5v-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 6 6 0 0 0 1.2 3.1 13.4 13.4 0 0 0 5.2 4.6c1.9.8 2.6.9 3.6.7a3 3 0 0 0 2-1.4 2.4 2.4 0 0 0 .2-1.4c-.1-.2-.3-.3-.6-.4zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.8L.1 24l6.3-1.7a11.8 11.8 0 0 0 5.6 1.4 11.8 11.8 0 0 0 8.4-20.1z"/></svg>
+            Enviar solicitud por WhatsApp
+          </button>
+          <p class="hint">Tus datos se usan únicamente para activar tu beneficio.</p>
+        </form>
+        <div class="success" id="success">
+          <div class="ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h3>¡Solicitud lista!</h3>
+          <p>Se abrió WhatsApp con tus datos. Solo presiona <b>Enviar</b> en el chat para completar tu registro.</p>
+          <a class="btn btn-primary" id="waAgain" target="_blank" rel="noopener">Abrir WhatsApp de nuevo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow">Contacto</div>
+      <h2>¿Tienes dudas? Escríbenos</h2>
+    </div>
+    <div class="contact">
+      <a href="mailto:gerenciaexpertosdelaweb@gmail.com"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div><div><small>Correo</small><span>gerenciaexpertosdelaweb@gmail.com</span></div></a>
+      <a href="https://wa.me/584145764613" target="_blank" rel="noopener"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></div><div><small>Teléfono / WhatsApp</small><span>0414-5764613</span></div></a>
+      <a href="https://instagram.com/sismedicalven" target="_blank" rel="noopener"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.4A4 4 0 1 1 12.6 8 4 4 0 0 1 16 11.4zM17.5 6.5h.01"/></svg></div><div><small>Instagram</small><span>@sismedicalven</span></div></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><b>Sismedical</b> · Historias Clínicas Online<br>Alianza especial con la Dra. Mairim Bodor, Madrina de la Promoción</div>
+</footer>
+
+<script>
+/* ===== CONFIGURACIÓN ===== */
+const WHATSAPP = '584145764613';   // Número que recibe las solicitudes (formato internacional, sin +)
+const SHEETS_URL = '';             // Opcional: URL de Google Apps Script para guardar cada registro en Google Sheets
+
+const PAISES = ['Venezuela','Argentina','Bolivia','Chile','Colombia','Costa Rica','Cuba','Ecuador','El Salvador','España','Estados Unidos','Guatemala','Honduras','México','Nicaragua','Panamá','Paraguay','Perú','Puerto Rico','República Dominicana','Uruguay','Otro'];
+const ESTADOS_VE = ['Amazonas','Anzoátegui','Apure','Aragua','Barinas','Bolívar','Carabobo','Cojedes','Delta Amacuro','Distrito Capital','Falcón','Guárico','La Guaira','Lara','Mérida','Miranda','Monagas','Nueva Esparta','Portuguesa','Sucre','Táchira','Trujillo','Yaracuy','Zulia'];
+
+const $ = id => document.getElementById(id);
+const pais = $('pais'), estado = $('estado'), estadoTxt = $('estadoTxt');
+pais.innerHTML = PAISES.map(p => `<option>${p}</option>`).join('');
+estado.innerHTML = '<option value="">Selecciona tu estado</option>' + ESTADOS_VE.map(e => `<option>${e}</option>`).join('');
+pais.addEventListener('change', () => {
+  const ve = pais.value === 'Venezuela';
+  estado.style.display = ve ? '' : 'none';
+  estadoTxt.style.display = ve ? 'none' : '';
+});
+
+$('cedula').addEventListener('input', e => e.target.value = e.target.value.replace(/\D/g,'').slice(0,10));
+$('telefono').addEventListener('input', e => e.target.value = e.target.value.replace(/[^\d+\-\s()]/g,''));
+
+function setInvalid(el, bad){ el.closest('.field').classList.toggle('invalid', bad); return !bad; }
+
+$('form').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = {
+    padrino: $('padrino').value.trim(),
+    graduando: $('graduando').value.trim(),
+    cedula: $('tipoCedula').value + '-' + $('cedula').value.trim(),
+    telefono: $('telefono').value.trim(),
+    pais: pais.value,
+    estado: pais.value === 'Venezuela' ? estado.value : estadoTxt.value.trim()
+  };
+  let ok = true;
+  ok = setInvalid($('padrino'), v.padrino.length < 3) && ok;
+  ok = setInvalid($('graduando'), v.graduando.length < 3) && ok;
+  ok = setInvalid($('cedula'), $('cedula').value.length < 5) && ok;
+  ok = setInvalid($('telefono'), v.telefono.replace(/\D/g,'').length < 7) && ok;
+  ok = setInvalid(pais, !v.pais) && ok;
+  ok = setInvalid(estado, !v.estado) && ok;
+  const c = $('consent').checked; $('consentWrap').classList.toggle('invalid', !c); ok = c && ok;
+  if (!ok) { document.querySelector('.invalid')?.scrollIntoView({behavior:'smooth', block:'center'}); return; }
+
+  const msg = `*SOLICITUD – BENEFICIO GRADUANDOS SISMEDICAL*\n(6 meses de acceso gratuito)\n\n` +
+    `• Padrino/Madrina: ${v.padrino}\n• Graduando: ${v.graduando}\n• Cédula: ${v.cedula}\n` +
+    `• Teléfono: ${v.telefono}\n• País: ${v.pais}\n• Estado: ${v.estado}\n\n` +
+    `Solicito formalmente la activación de mi beneficio.`;
+  const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+
+  if (SHEETS_URL) {
+    fetch(SHEETS_URL, {method:'POST', mode:'no-cors', body: JSON.stringify({...v, fecha: new Date().toISOString()})}).catch(()=>{});
+  }
+  window.open(url, '_blank');
+  $('waAgain').href = url;
+  $('form').style.display = 'none';
+  $('success').style.display = 'block';
+});
+
+['padrino','graduando','cedula','telefono','estado','estadoTxt'].forEach(id =>
+  $(id).addEventListener('input', () => $(id).closest('.field').classList.remove('invalid')));
+</script>
+</body>
+</html>
